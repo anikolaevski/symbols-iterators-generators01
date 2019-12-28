@@ -1,25 +1,32 @@
-export default class Team {
-  constructor(obj) {
-    this.seq = Team.newCounter();
-    this.name = obj.name;
-    this.type = obj.type;
-    this.health = obj.health;
-    this.level = obj.level;
-    this.attack = obj.attack;
-    this.defence = obj.defence;
+/* eslint-disable no-plusplus */
+// eslint-disable-next-line import/prefer-default-export
+export class Team {
+  constructor() {
+    Team.m.members = [];
+    // this.last = 0;
+    Team.m.last = 0;
   }
 
-  // eslint-disable-next-line func-names
+  // eslint-disable-next-line class-methods-use-this
+  add(obj) {
+    Team.m.members.push(obj);
+    // this.last++;
+    Team.m.last++;
+  }
+
+  static m() {}
+
+  // eslint-disable-next-line class-methods-use-this
   [Symbol.iterator]() {
-    let current = this.seq;
-    const last = Team.maxCounter();
     // метод должен вернуть объект с методом next()
+    let current = 0;
     return {
       next() {
-        if (current <= last) {
+        // console.log(current, Team.m.last);
+        if (current < Team.m.last) {
           return {
             done: false,
-            value: current++,
+            value: Team.m.members[current++],
           };
         }
         return {
@@ -28,21 +35,4 @@ export default class Team {
       },
     };
   }
-
-
-  static newCounter() {
-    // проверяем не задана ли уже эта переменная значением
-    if (typeof (Team.newCounter.counter) === 'undefined') {
-    // если нет ставим в ноль
-      Team.newCounter.counter = 0;
-    }
-
-    // обычный инкремент как пример операции над переменной
-    return ++Team.newCounter.counter;
-  }
-
-  static maxCounter() {
-    return Team.newCounter.counter;
-  }
-  // static current;
 }

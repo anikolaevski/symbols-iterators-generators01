@@ -1,7 +1,7 @@
 {
   "name": "symbols-iterators-generators01",
   "version": "1.0.0",
-  "description": "Netology AJS symbols-iterators-generators01 Task#1",
+  "description": "Netology AJS symbols-iterators-generators Task#1",
   "main": "",
   "scripts": {
     "start": "webpack-dev-server --mode development",
